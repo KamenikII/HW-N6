@@ -8,11 +8,25 @@ class WallServiceTest {
     fun add() {
         // создаём целевой сервис
         val service = WallService
-        val post = Post(fromId = 0, date = 0, postType = "post", content = "test")
+        val post = Post(fromId = 0, date = 0, postType = "post", content = "test", original = null)
         // заполняем пост
         service.add(post)
         val result = (service.giveId(0) != 0)
+        assertEquals(true, result)
+        //assertTrue(result)
+    }
 
+    @Test
+    fun addRepost() {
+        val service = WallService
+        val post = Post(fromId = 0, date = 0, postType = "post", content = "test", original = null)
+        // заполняем пост
+        service.add(post)
+
+        val repost = Post(fromId = 1, date = 0, postType = "post", content = "test repost", original = post)
+        service.add(repost)
+
+        val result = (service.repost(1).id == post.id)
         assertTrue(result)
     }
 
@@ -21,11 +35,11 @@ class WallServiceTest {
         // создаём целевой сервис
         val service = WallService
         // заполняем несколькими постами
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test1"))
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test2"))
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test3"))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test1", original = null))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test2", original = null))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test3", original = null))
         // создаём информацию об обновлении
-        val update = Post(id = 1, fromId = 0, date = 0, postType = "post", content = "new")
+        val update = Post(id = 1, fromId = 0, date = 0, postType = "post", content = "new", original = null)
 
         // выполняем целевое действие
         val result = service.update(update)
@@ -37,11 +51,11 @@ class WallServiceTest {
         // создаём целевой сервис
         val service = WallService
         // заполняем несколькими постами
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test1"))
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test2"))
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test3"))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test1", original = null))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test2", original = null))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test3", original = null))
         // создаём информацию об обновлении
-        val update = Post(id = 4, fromId = 0, date = 0, postType = "post", content = "new")
+        val update = Post(id = 4, fromId = 0, date = 0, postType = "post", content = "new", original = null)
 
         // выполняем целевое действие
         val result = service.update(update)
@@ -53,11 +67,11 @@ class WallServiceTest {
         // создаём целевой сервис
         val service = WallService
         // заполняем несколькими постами
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test1", canEdit = false))
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test2"))
-        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test3"))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test1", canEdit = false, original = null))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test2", original = null))
+        service.add(Post(fromId = 0, date = 0, postType = "post", content = "test3", original = null))
         // создаём информацию об обновлении
-        val update = Post(id = 0, fromId = 0, date = 0, postType = "post", content = "new")
+        val update = Post(id = 0, fromId = 0, date = 0, postType = "post", content = "new", original = null)
 
         // выполняем целевое действие
         val result = service.update(update)

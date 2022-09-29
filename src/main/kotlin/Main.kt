@@ -29,6 +29,12 @@ object WallService {
         return false
     }
 
+    fun repost(index: Int): Post {
+        val post = posts[index]
+        val origin = if (post.original == null) post else post.original
+        return origin
+    }
+
     fun giveId(index: Int): Int {
         return(posts[index].id)
     }
