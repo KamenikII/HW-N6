@@ -7,17 +7,25 @@ interface Attachment {
         this.type = type
     }
 }
-
-class Audio {}
-
-class AudioAttachment (
-    override var type: String,
+/*Например так и дальше по аналогии, 
+Сами классы аудио, видео не имплементируют интерфейс, 
+в то время как классы, имплеметирующие интерфейс содержат поле с соответствующим классом
+class Audio {
     val id: Int = 0,
     val albumId: Int = 0,
     val ownerId: Int = 0,
     val userId: Int = 0,
+    val url: String
+}
+
+class AudioAttachment (
+    override var type: String,
     val file: Audio
+    override fun viewAttachment(type: String) {
+        println("Type attachment: $type, $file")
+    }
 ): Attachment
+*/
 
 class Video {}
 
