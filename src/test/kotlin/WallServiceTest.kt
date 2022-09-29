@@ -17,20 +17,6 @@ class WallServiceTest {
     }
 
     @Test
-    fun addRepost() {
-        val service = WallService
-        val post = Post(fromId = 0, date = 0, postType = "post", content = "test", original = null)
-        // заполняем пост
-        service.add(post)
-
-        val repost = Post(fromId = 1, date = 0, postType = "post", content = "test repost", original = post)
-        service.add(repost)
-
-        val result = (service.repost(1).id == post.id)
-        assertTrue(result)
-    }
-
-    @Test
     fun updateTrue() {
         // создаём целевой сервис
         val service = WallService
